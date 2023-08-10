@@ -1,0 +1,110 @@
+﻿The Impossible challenge
+
+
+
+
+Description :-  It really is a huge rat hole trapp machine cause it has only one flag which is tempting for sure, it has a download file and some encrypted stuff shown to us on the task 1 and a hint referring to the steganography. But it's really hard to understand these hints and encryption.
+
+
+
+
+Task 1 :- 
+
+
+#The Download file :-  
+        After downloading the zip file it tried to unzip it but it is protected by a password sooo………I thought what does it even have can it provide after extracting
+cause I don't want to waste my time of john if the file has nothing.
+        So is used binwalk which in return extract the zip file but it extract it more like a sudo it will just extract the files with name and not with the content inside it.
+
+
+----------------------------------------------------------------------------------------------------------------
+┌──(kali㉿kali)-[~/Downloads]
+└─$ binwalk  -e Impossible.zip
+
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             Zip archive data, encrypted at least v2.0 to extract, compressed size: 102, uncompressed size: 91, name: flag.txt
+230           0xE6            End of Zip archive, footer length: 22
+
+
+—-------------------------------------------------------------------------------------------------------------
+         So it do have the flag file . Now lest try john on it 
+
+
+----------------------------------------------------------------------------------------------------------------
+┌──(kali㉿kali)-[~/Downloads]
+└─$ john imp.hash 
+    
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 4 OpenMP threads
+Proceeding with single, rules:Single
+Press 'q' or Ctrl-C to abort, almost any other key for status
+Almost done: Processing the remaining buffered candidate passwords, if any.
+Proceeding with wordlist:/usr/share/john/password.lst
+Proceeding with incremental:ASCII
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+
+
+Nothing………..
+
+
+#The Encrypted text :-  
+qo qt q` r6 ro su pn s_ rn r6 p6 s_ q2 ps qq rs rp ps rt r4 pu pt qn r4 rq pt q` so pu ps r4 sq pu ps q2 su rn on oq o_ pu ps ou r5 pu pt r4 sr rp qt pu rs q2 qt r4 r4 ro su pq o5
+
+
+So after using an online encryption identifier I got it decoded somehow.It is  a triple encrypted text from :- 
+
+
+rot13 > rot47 > Hex > Base64
+
+
+All i got form decoding it was :- 
+
+
+It's inside the text, in front of your eyes!
+
+
+  
+
+Which is not at all helpful at first, But then I thought that there were some challenges where we could inspect the current web page.I found the description was so dull maybe so i only inspected that part of the page first and found it strange. 
+
+
+  
+
+
+
+
+
+And most weird part was when is pasted it on my terminal it looked like this 
+
+
+┌──(kali㉿kali)-[~]
+└─$ <200c><200c><200c><200c><200d><feff><200c><200c>Hmm<200c><200c><200c><200c><200d><202c><200c><200d><200c><200c><200c><200c><200d><feff><200c><feff><200c><200c><200c><200c><200d><feff><200c><feff><200c><200c><200c><200c><200d><feff><200d><feff><200c><200c><200c><200c><200d><202c><feff><feff><200c><200c><200c><200c><200d><feff><200c><202c><200c><200c><200c><200c><200d><202c><200d><200c><200c><200c><200c><200c><200c><202c><200c><200c><200c><200c><200c><200c><200d><202c><202c><200d><200c><200c><200c><200c><200d><feff><200c><feff><200c><200c><200c><200c><200c><202c><200c><200c><200c><200c><200c><200c><200d><202c><202c><200c><200c><200c><200c><200c><200d><202c><200c><200d><200c><200c><200c><200c><200d><202c><202c><200c><200c><200c><200c><200c><200d><202c><200c><200d><200c><200c><200c><200c><200d><202c><200d><200d><200c><200c><200c><200c><200d><feff><202c><202c><200c><200c><200c><200c><200d><feff><200c><200c><200c><200c><200c><200c><200d><feff><202c><202c>
+
+
+Weird right ?.
+
+
+
+
+After using this encoder I finally was dropped with the password 
+
+
+https://330k.github.io/misc_tools/unicode_steganography.html
+
+
+Sure The password is hidden .
+
+
+
+
+
+
+Follow the process I made it hell simple to go through Enjoy and complete the room. 
+Thank You !
